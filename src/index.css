@@ -1,0 +1,10 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+
+
+.avatar-img{
+          background-image: url('avatarMovieBG.jpg');
+          background-size: cover;
+}
