@@ -1,5 +1,6 @@
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query'
 import { Routes, Route } from 'react-router-dom'
+import MovieDetail from './components/organisms/MovieDetail'
 import { Recommendation } from './components/organisms/Recommendation'
 import Login from './pages/auth/Login'
 import SignUp from './pages/auth/SignUp'
@@ -20,6 +21,7 @@ function App() {
         <Route path='/' element={<Home />} >
           <Route path='/' element={<Recommendation />} />
           <Route path='/movies' element={<Movies />} />
+          <Route path=':id' element={<MovieDetail/>}/>
         </Route>
         <Route path='*' element={<NotFound />} />
       </Routes>

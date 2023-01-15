@@ -1,6 +1,6 @@
 import axios from 'axios';
 
-interface PopularMovies {
+export interface PopularMovies {
   backdrop_path: string;
   id: number;
   original_title: string;
