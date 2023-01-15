@@ -10,7 +10,7 @@ export default function Home() {
           const match = location.pathname
           console.log('this is', match);
           return (
-                    <div>
+                    <div className='bg-primary-bg'>
                               <div className='flex justify-around gap-4'>
                                         {/* navigation */}
                                         <div className='w-1/5 bg-[#212121] rounded-r-custom01 pl-10 py-10'>

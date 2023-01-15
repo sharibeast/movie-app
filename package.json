@@ -9,6 +9,8 @@
     "preview": "vite preview"
   },
   "dependencies": {
+    "@tanstack/react-query": "^4.22.0",
+    "axios": "^1.2.2",
     "better-react-carousel": "^1.1.1",
     "embla-carousel-react": "^7.0.5",
     "react": "^18.2.0",
