@@ -7,6 +7,7 @@ import MenuIcon from '../atoms/icons/MenuIcon'
 import PlayIcon from '../atoms/icons/PlayIcon'
 import SearchIcon from '../atoms/icons/SearchIcon'
 import SettingIcon from '../atoms/icons/SettingIcon'
+import Loader from '../atoms/Loader'
 import MovieSearchInput from '../molecules/MovieSearchInput'
 
 
@@ -18,7 +19,7 @@ export const Recommendation = () => {
 
 
   if (!data || !upComingMovies) {
-    return <div>loading</div>
+    return <div className='flex-1 grid place-items-center'><Loader /></div>
   }
 
   return (
@@ -100,13 +101,22 @@ export const SearchInputBar = () => {
   return (
     <>
       <div className='flex justify-between mb-8 gap-6'>
-        <button onClick={() => setOpen(!open)}>
+        <button className='lg:hidden' onClick={() => setOpen(!open)}>
           <MenuIcon />
         </button>
         <MovieSearchInput />
-        <button>
+        <button className='lg:hidden'>
           <SettingIcon />
         </button>
+        <div className='hidden  lg:flex lg:items-center lg:gap-4'>
+          <div className='w-fit p-2 bg-gray-01 rounded-full opacity-50'>
+            <svg width="36" height="36" fill="none" viewBox="0 0 24 24">
+              <path stroke="currentColor" strokeLinecap="round" strokeLinejoin="round" strokeWidth="1.5" d="M17.25 12V10C17.25 7.1005 14.8995 4.75 12 4.75C9.10051 4.75 6.75 7.10051 6.75 10V12L4.75 16.25H19.25L17.25 12Z"></path>
+              <path stroke="currentColor" strokeLinecap="round" strokeLinejoin="round" strokeWidth="1.5" d="M9 16.75C9 16.75 9 19.25 12 19.25C15 19.25 15 16.75 15 16.75"></path>
+            </svg>
+          </div>
+          <img src='/src/assets/images/pr1.jpeg' className='h-20 w-20 rounded-full' />
+        </div>
       </div>
       {/* search bar input --end */}
 

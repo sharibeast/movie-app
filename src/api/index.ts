@@ -13,6 +13,7 @@ export interface PopularMovies {
 const API_KEY = '71dff2b9ee94145531dfee2bace847c6';
 const URL = `https://api.themoviedb.org/3/movie/popular?api_key=${API_KEY}&language=en-US&page=1`;
 const UPCOMINGURL = `https://api.themoviedb.org/3/movie/upcoming?api_key=${API_KEY}&language=en-US&page=1`;
+const SEARCHURL = `https://api.themoviedb.org/3/search/movie?api_key=${API_KEY}&language=en-US&page=1&include_adult=false&query=lone`;
 // const SIMILAR_MOVIES = `https://api.themoviedb.org/3/movie/${id}/similar?api_key=${API_KEY}&language=en-US&page=1`;
 const IMG_URL = 'https://image.tmdb.org/t/p/w500';
 
@@ -60,4 +61,19 @@ export const getSimilarMovies = async (movie_id: string) => {
   return dd as PopularMovies[];
 };
 
+export const searchMovies = async (query: string) => {
+  const res = axios.get(
+    `https://api.themoviedb.org/3/search/movie?api_key=${API_KEY}&language=en-US&page=1&include_adult=false&query=${query}`,
+  );
+  const results = (await res).data.results as PopularMovies[];
+  const data = results.map((mov) => ({
+    ...mov,
+    backdrop_path: `${IMG_URL}${mov.backdrop_path}`,
+    poster_path: `${IMG_URL}${mov.poster_path}`,
+  }));
+
+  console.log('results', data);
+
+  return data;
+};
 // getPopularMovies();

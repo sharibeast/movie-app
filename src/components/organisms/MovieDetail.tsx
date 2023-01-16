@@ -12,16 +12,20 @@ import StarIcon from '../atoms/icons/StarIcon'
 import MovieSearchInput from '../molecules/MovieSearchInput'
 import { MovieCard, SearchInputBar } from './Recommendation'
 import { useQuery } from '@tanstack/react-query'
+import Loader from '../atoms/Loader'
 
 export default function MovieDetail() {
   const { id } = useParams()
   const { data: similarMovies, isLoading } = useQuery(['similarMovies', id], () => getSimilarMovies(id!))
   const location = useLocation()
   const { data } = location.state as { data: PopularMovies }
-  const [open, setOpen] = useState(false)
 
   if (isLoading) {
-    return <div>loading</div>
+    return <div className='flex-1 grid place-items-center'><Loader /></div>
+  }
+
+  if (!data) {
+    return <div>No movie data available</div>
   }
 
   return (
@@ -91,16 +95,23 @@ export default function MovieDetail() {
               <button className='bg-[#3DD0CA] rounded-md py-1 px-2 w-full font-semibold text-lg'>See Show Time</button>
               <button className='bg-[#131313] rounded-md py-2 px-2 w-full mt-4 font-semibold text-lg flex items-center justify-center gap-4'> <MenuIcon /> More watch Options</button>
             </div>
-            <div className='mt-8 relative'>
-              <div className='grid grid-cols-3'>
-                <img src={similarMovies![0].poster_path} className="rounded-l-2xl" alt={similarMovies![0].title} />
-                <img src={similarMovies![1].poster_path} alt={similarMovies![0].title} />
-                <img src={similarMovies![2].poster_path} className="rounded-r-2xl" alt={similarMovies![0].title} />
-              </div>
-              <div className='flex items-center px-4 gap-4 bg-black opacity-75 text-sm md:text-base py-3 absolute bottom-0 w-full'>
-                <MenuIcon /> The best movies and shows in september
-              </div>
-            </div>
+
+            {
+              (similarMovies![0].poster_path && similarMovies![1].poster_path && similarMovies![0].poster_path) ? (
+                <div className='mt-8 relative'>
+                  <div className='grid grid-cols-3'>
+                    <img src={similarMovies![0].poster_path} className="rounded-l-2xl" alt={similarMovies![0].title} />
+                    <img src={similarMovies![1].poster_path} alt={similarMovies![0].title} />
+                    <img src={similarMovies![2].poster_path} className="rounded-r-2xl" alt={similarMovies![0].title} />
+                  </div>
+                  <div className='flex items-center px-4 gap-4 bg-black opacity-75 text-sm md:text-base py-3 absolute bottom-0 w-full'>
+                    <MenuIcon /> The best movies and shows in september
+                  </div>
+                </div>
+              ) : null
+            }
+
+
 
 
             <div className='grid gap-4 mt-8'>
