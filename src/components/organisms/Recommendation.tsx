@@ -3,6 +3,7 @@ import React, { useState } from 'react'
 import { Link, useLocation, useNavigate } from 'react-router-dom'
 import { getPopularMovies, getUpcomingMovies } from '../../api'
 import { GlowLink } from '../../pages/Home'
+import CloseIcon from '../atoms/icons/CloseIcon'
 import ExclamationIcon from '../atoms/icons/ExclamationIcon'
 import HomeIcon from '../atoms/icons/HomeIcon'
 import LogoutIcon from '../atoms/icons/LogoutIcon'
@@ -130,8 +131,13 @@ export const SearchInputBar = () => {
       {/* mobile nav */}
       {
         open ? (
-          <div onClick={() => setOpen(!open)} className='bg-primary-bg p-6 w-3/5 sm:w-[400px] h-screen z-10 absolute top-0 -mx-4'>
-            <StyledLogo />
+          <div onClick={() => setOpen(!open)} className='bg-primary-bg p-6 w-3/5 sm:w-[400px] lg:hidden h-screen z-10 absolute top-0 -mx-4'>
+            <div className='flex justify-between'>
+              <StyledLogo />
+              <button onClick={() => setOpen(false)}>
+                <CloseIcon />
+              </button>
+            </div>
 
             <ul className='flex flex-col gap-4 p-4  mt-8'>
               <GlowLink icon={<HomeIcon active={match === '/'} />} to={"/"}>

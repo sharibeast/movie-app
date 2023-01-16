@@ -114,7 +114,11 @@ export const Navigation = () => {
         <GlowLink icon={<VideoCameraIcon active={match === '/movies'} />} to={"/movies"}>
           movies
         </GlowLink>
-        {/* <GlowLink  icon={<TvSeriesIcon />} to={"/tvseries"}>Tv series</GlowLink> */}
+        <div className='bg-[#191919] flex w-fit flex-col items-center rounded-2xl py-4 px-6'>
+          <h3 className='text-white font-medium opacity-60'>Play movies and quizzes <br /> and earn  free tickets</h3>
+          <p className='text-gray-01'>50k people are playing <br /> now</p>
+          <button className='bg-[#276361] text-[#3DD2CC] rounded-2xl py-2 px-2'>start playing</button>
+        </div>
         <GlowLink icon={<LogoutIcon />} to={"/signup"}>Logout</GlowLink>
       </ul>
     </div>
