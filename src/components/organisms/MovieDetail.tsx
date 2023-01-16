@@ -15,10 +15,14 @@ import { useQuery } from '@tanstack/react-query'
 
 export default function MovieDetail() {
   const { id } = useParams()
-  const { data: similarMovies } = useQuery(['similarMovies', id], () => getSimilarMovies(id!))
+  const { data: similarMovies, isLoading } = useQuery(['similarMovies', id], () => getSimilarMovies(id!))
   const location = useLocation()
   const { data } = location.state as { data: PopularMovies }
   const [open, setOpen] = useState(false)
+
+  if (isLoading) {
+    return <div>loading</div>
+  }
 
   return (
     <div>
@@ -68,7 +72,7 @@ export default function MovieDetail() {
               <span className='text-lg md:text-xl text-white font-bold'>Similar movies</span>
               <button className='text-gray-500 text-base md:text-xl capitalize'>see all</button>
             </div>
-            <div className='grid grid-cols-2 md:grid-cols-4 gap-16'>
+            <div className='grid grid-cols-2 md:grid-cols-4 gap-4 md:gap-16'>
               {
                 similarMovies?.map((movie) => <Link onClick={() => window.scrollTo(0, 0)} to={String(movie.id)} key={movie.id} state={{ data: movie }}><MovieCard src={movie.poster_path} alt={movie.original_title} /></Link>
                 )
@@ -85,6 +89,61 @@ export default function MovieDetail() {
             </div>
             <div>
               <button className='bg-[#3DD0CA] rounded-md py-1 px-2 w-full font-semibold text-lg'>See Show Time</button>
+              <button className='bg-[#131313] rounded-md py-2 px-2 w-full mt-4 font-semibold text-lg flex items-center justify-center gap-4'> <MenuIcon /> More watch Options</button>
+            </div>
+            <div className='mt-8 relative'>
+              <div className='grid grid-cols-3'>
+                <img src={similarMovies![0].poster_path} className="rounded-l-2xl" alt={similarMovies![0].title} />
+                <img src={similarMovies![1].poster_path} alt={similarMovies![0].title} />
+                <img src={similarMovies![2].poster_path} className="rounded-r-2xl" alt={similarMovies![0].title} />
+              </div>
+              <div className='flex items-center px-4 gap-4 bg-black opacity-75 text-sm md:text-base py-3 absolute bottom-0 w-full'>
+                <MenuIcon /> The best movies and shows in september
+              </div>
+            </div>
+
+
+            <div className='grid gap-4 mt-8'>
+              <MovieStunt
+                detail='updated 1 week ago ‧ 50 images'
+                src={similarMovies![0].backdrop_path}
+                title="The billion dollar film club:50 Movie to reach $1 Billion worldwide"
+              />
+              <MovieStunt
+                detail='updated 1 month ago ‧ 52 images'
+                src={similarMovies![6].backdrop_path}
+                title="2022 summer movies guide"
+              />
+              <MovieStunt
+                detail='updated 1 month ago ‧ 52 images'
+                src={similarMovies![3].backdrop_path}
+                title="Upcoming Action and Adventure Movies and Tv"
+              />
+            </div>
+
+
+
+
+
+            <div className='mt-8 relative'>
+              <div className='grid grid-cols-3'>
+                <img src={similarMovies![3].poster_path} className="rounded-l-2xl" alt={similarMovies![0].title} />
+                <img src={similarMovies![4].poster_path} alt={similarMovies![0].title} />
+                <img src={similarMovies![5].poster_path} className="rounded-r-2xl" alt={similarMovies![0].title} />
+              </div>
+              <div className='flex items-center px-4 gap-4 bg-black opacity-75 text-sm md:text-base py-3 absolute bottom-0 w-full'>
+                <MenuIcon /> Top 50 TV dramas
+              </div>
+            </div>
+            <div className='mt-8 relative'>
+              <div className='grid grid-cols-3'>
+                <img src={similarMovies![0].poster_path} className="rounded-l-2xl" alt={similarMovies![0].title} />
+                <img src={similarMovies![7].poster_path} alt={similarMovies![0].title} />
+                <img src={similarMovies![6].poster_path} className="rounded-r-2xl" alt={similarMovies![0].title} />
+              </div>
+              <div className='flex items-center px-4 gap-4 bg-black opacity-75 text-sm md:text-base py-3 absolute bottom-0 w-full'>
+                <MenuIcon /> New & upcoming sequels, prequels
+              </div>
             </div>
           </div>
         </div>
@@ -147,6 +206,25 @@ export const CastProfile = ({ movieName, name, src }: ICastProfile) => {
       <img src={src} className='h-24 w-24 md:h-32 md:w-32 rounded-full aspect-[2/2]' />
       <h2 className='font-medium text-xl text-center'>{name}</h2>
       <p className='text-lg text-gray-01 text-center'>{movieName}</p>
+    </div>
+  )
+}
+
+
+
+interface IMovieStunt {
+  src: string
+  title: string
+  detail: string
+}
+export const MovieStunt = ({ src, detail, title }: IMovieStunt) => {
+  return (
+    <div className='grid grid-cols-6 border rounded-lg p-4'>
+      <div className='col-span-3 md:col-span-4'>
+        <h4 className='text-gray-400'>{title}</h4>
+        <p className='text-gray-01'>{detail}</p>
+      </div>
+      <img className='col-span-3 md:col-span-2 rounded-lg ' src={src} />
     </div>
   )
 }

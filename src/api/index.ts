@@ -53,7 +53,7 @@ export const getSimilarMovies = async (movie_id: string) => {
   }));
 
   console.log('similar movies', data);
-  const dd = data.filter((movie, idx) => idx < 4);
+  const dd = data.filter((movie, idx) => idx < 8);
 
   console.log('dill', dd);
 
