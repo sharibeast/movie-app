@@ -1,13 +1,18 @@
 import { useQuery } from '@tanstack/react-query'
 import React, { useState } from 'react'
-import { Link, useNavigate } from 'react-router-dom'
+import { Link, useLocation, useNavigate } from 'react-router-dom'
 import { getPopularMovies, getUpcomingMovies } from '../../api'
+import { GlowLink } from '../../pages/Home'
 import ExclamationIcon from '../atoms/icons/ExclamationIcon'
+import HomeIcon from '../atoms/icons/HomeIcon'
+import LogoutIcon from '../atoms/icons/LogoutIcon'
 import MenuIcon from '../atoms/icons/MenuIcon'
 import PlayIcon from '../atoms/icons/PlayIcon'
 import SearchIcon from '../atoms/icons/SearchIcon'
 import SettingIcon from '../atoms/icons/SettingIcon'
 import Loader from '../atoms/Loader'
+import { StyledLogo } from '../atoms/Logo'
+import VideoCameraIcon from '../atoms/VideoCameraIcon'
 import MovieSearchInput from '../molecules/MovieSearchInput'
 
 
@@ -98,6 +103,8 @@ export const MovieCard = ({ src, alt }: MovieProps) => {
 
 export const SearchInputBar = () => {
   const [open, setOpen] = useState(false)
+  const location = useLocation()
+  const match = location.pathname
   return (
     <>
       <div className='flex justify-between mb-8 gap-6'>
@@ -123,7 +130,19 @@ export const SearchInputBar = () => {
       {/* mobile nav */}
       {
         open ? (
-          <div onClick={() => setOpen(!open)} className='bg-black w-3/5 sm:w-[400px] h-screen z-10 absolute top-0 -mx-4'>
+          <div onClick={() => setOpen(!open)} className='bg-primary-bg p-6 w-3/5 sm:w-[400px] h-screen z-10 absolute top-0 -mx-4'>
+            <StyledLogo />
+
+            <ul className='flex flex-col gap-4 p-4  mt-8'>
+              <GlowLink icon={<HomeIcon active={match === '/'} />} to={"/"}>
+                Home
+              </GlowLink>
+              <GlowLink icon={<VideoCameraIcon active={match === '/movies'} />} to={"/movies"}>
+                movies
+              </GlowLink>
+              {/* <GlowLink  icon={<TvSeriesIcon />} to={"/tvseries"}>Tv series</GlowLink> */}
+              <GlowLink icon={<LogoutIcon />} to={"/signup"}>Logout</GlowLink>
+            </ul>
 
           </div>
         ) : null

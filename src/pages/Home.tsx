@@ -4,6 +4,7 @@ import { useLocation, Link, Outlet, useNavigate } from 'react-router-dom'
 import { getPopularMovies, getUpcomingMovies } from '../api'
 import ExclamationIcon from '../components/atoms/icons/ExclamationIcon'
 import HomeIcon from '../components/atoms/icons/HomeIcon'
+import LogoutIcon from '../components/atoms/icons/LogoutIcon'
 import PlayIcon from '../components/atoms/icons/PlayIcon'
 import TvSeriesIcon from '../components/atoms/icons/TvSeriesIcon'
 import Loader from '../components/atoms/Loader'
@@ -34,7 +35,7 @@ interface CustomLinkProps {
   to: string
   icon?: React.ReactNode
 }
-function GlowLink({ children, to, icon }: CustomLinkProps) {
+export function GlowLink({ children, to, icon }: CustomLinkProps) {
   const location = useLocation()
   const match = location.pathname === to
   return (
@@ -114,7 +115,7 @@ export const Navigation = () => {
           movies
         </GlowLink>
         {/* <GlowLink  icon={<TvSeriesIcon />} to={"/tvseries"}>Tv series</GlowLink> */}
-        <GlowLink to={"/signup"}>Logout</GlowLink>
+        <GlowLink icon={<LogoutIcon />} to={"/signup"}>Logout</GlowLink>
       </ul>
     </div>
   )
