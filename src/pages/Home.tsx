@@ -7,29 +7,17 @@ import VideoCameraIcon from '../components/atoms/VideoCameraIcon'
 import MovieSearchInput from '../components/molecules/MovieSearchInput'
 
 export default function Home() {
-  const match = location.pathname
 
   return (
     <div className='bg-primary-bg'>
       <div className='flex justify-around gap-4'>
         {/* navigation */}
-        <div className='w-1/5 bg-[#212121] rounded-r-custom01 pl-10 py-10'>
-          <StyledLogo />
-          <ul className='flex flex-col gap-4  mt-8'>
-            <GlowLink icon={<HomeIcon active={match === '/'} />} to={"/"}>
-              Home
-            </GlowLink>
-            <GlowLink icon={<VideoCameraIcon active={match === '/movies'} />} to={"/movies"}>
-              movies
-            </GlowLink>
-            <GlowLink icon={<TvSeriesIcon />} to={"/tv series"}>Tv series</GlowLink>
-          </ul>
-        </div>
+        {/* <Navigation /> */}
         <Outlet />
         {/* sidebar */}
-        <div className='bg-zinc-400 h-screen w-1/5'>
+        {/* <div className='bg-zinc-400 h-screen w-1/5'>
 
-        </div>
+        </div> */}
       </div>
     </div>
   )
@@ -61,3 +49,21 @@ export const Movies = () => {
   )
 }
 
+
+export const Navigation = () => {
+  const match = location.pathname
+  return (
+    <div className='w-1/5 bg-[#212121] rounded-r-custom01 pl-10 py-10'>
+      <StyledLogo />
+      <ul className='flex flex-col gap-4  mt-8'>
+        <GlowLink icon={<HomeIcon active={match === '/'} />} to={"/"}>
+          Home
+        </GlowLink>
+        <GlowLink icon={<VideoCameraIcon active={match === '/movies'} />} to={"/movies"}>
+          movies
+        </GlowLink>
+        <GlowLink icon={<TvSeriesIcon />} to={"/tv series"}>Tv series</GlowLink>
+      </ul>
+    </div>
+  )
+}

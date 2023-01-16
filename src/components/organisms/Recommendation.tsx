@@ -1,33 +1,56 @@
 import { useQuery } from '@tanstack/react-query'
-import React from 'react'
+import React, { useState } from 'react'
 import { Link } from 'react-router-dom'
 import { getPopularMovies } from '../../api'
+import ExclamationIcon from '../atoms/icons/ExclamationIcon'
+import MenuIcon from '../atoms/icons/MenuIcon'
 import PlayIcon from '../atoms/icons/PlayIcon'
 import SearchIcon from '../atoms/icons/SearchIcon'
+import SettingIcon from '../atoms/icons/SettingIcon'
 import MovieSearchInput from '../molecules/MovieSearchInput'
 
 
 export const Recommendation = () => {
   const { data, isLoading } = useQuery(['popularMovies'], getPopularMovies)
+  const [open, setOpen] = useState(false)
+
 
   if (!data) {
     return <div>loading</div>
   }
 
   return (
-    <div className='flex-1 py-10 text-white bg-primary-bg '>
+
+    <div className='flex-1 py-4 text-white bg-primary-bg px-2'>
       <div>
-        <div>
+        <div className='flex justify-between'>
+          <button onClick={() => setOpen(!open)}>
+            <MenuIcon />
+          </button>
           <MovieSearchInput />
-          <div className='relative mt-8'>
-            <img src={data[0].poster_path} className='rounded-2xl  h-[400px] w-full object-contain  ' />
-            <div className='absolute bottom-4 right-4 flex item-center gap-4'>
-              <Button />
-              <Button />
+          <button>
+            <SettingIcon />
+          </button>
+        </div>
+        {
+          open ? (
+            <div onClick={() => setOpen(!open)} className='bg-black w-3/5 h-screen z-10 absolute top-0 -mx-4'>
+
+            </div>
+          ) : null
+        }
+        <div>
+          <div className='max-h-96 relative'>
+            <img src={data[0].backdrop_path} className="w-full max-h-96 h-auto rounded-3xl" />
+            <div className='absolute right-5 bottom-5 md:right-20 md:bottom-20 flex items-center gap-8'>
+              <button className='flex items-center bg-[#7F847F] py-2 px-3 md:py-4 md:px-8 rounded-lg gap-2  opacity-90 hover:opacity-80 transition-all duration-200'>
+                <PlayIcon /> play
+              </button>
+              <button className='flex items-center bg-[#7F847F] py-2 px-3 md:py-4 md:px-8 rounded-lg gap-2  opacity-90 hover:opacity-80 transition-all duration-200'>
+                <ExclamationIcon /> More info
+              </button>
             </div>
           </div>
-
-          {/* trending */}
           <div>
             <div className='flex justify-between'>
               <span className='text-3xl text-white font-bold'>Trending</span>
@@ -43,6 +66,7 @@ export const Recommendation = () => {
         </div>
       </div>
     </div>
+
   )
 }
 
@@ -55,8 +79,42 @@ const MovieCard = ({ src, alt }: MovieProps) => {
     <div className='rounded-xl relative aspect-[3/2]'>
       <img alt={alt} className='rounded-xl  object-cover' src={src} />
     </div>)
+}
 
-}
-const Button = () => {
-  return <button className='flex items-center bg-[#8596b8] opacity-90 py-3 backdrop-blur-2xl text-lg px-8 rounded-xl text-white'><PlayIcon /> Play</button>
-}
+
+// const MenuOpenContext = React.createContext<any>(false)
+
+// const MenuOpenProvider = ({ children }: { children: React.ReactNode }) => {
+//   const [open, setOpen] = useState(false)
+
+//   const value = { open, setOpen }
+//   return (
+//     <MenuOpenContext.Provider value={value}>
+//       {children}
+//     </MenuOpenContext.Provider>
+//   )
+// }
+
+
+// const SearchInputBar = () => {
+//   const { open, setOpen } = React.useContext(MenuOpenContext)
+
+//   // console.log('data',);
+
+
+//   return (
+//     <div className='flex justify-between'>
+//       <button onClick={() => {
+//         console.log('clicked');
+//         setOpen(false)
+//         console.log(open);
+//       }}>
+//         <MenuIcon />
+//       </button>
+//       <MovieSearchInput />
+//       <button>
+//         <SettingIcon />
+//       </button>
+//     </div>
+//   )
+// }

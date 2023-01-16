@@ -1,10 +1,12 @@
 import React from 'react'
-
-export default function PlayIcon() {
+interface PlayIconProps {
+          size?: number
+}
+export default function PlayIcon({ size = 24 }: PlayIconProps) {
           return (
                     <svg
-                              width="24"
-                              height="24"
+                              width={size}
+                              height={size}
                               viewBox="0 0 15 15"
                               fill="currentColor"
                               className='text-white'
