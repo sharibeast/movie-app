@@ -17,7 +17,7 @@ export default function Home() {
 
   return (
     <div className='bg-primary-bg'>
-      <div className='flex justify-around gap-4'>
+      <div className='flex justify-between gap-2'>
         {/* navigation */}
         <Navigation />
         <Outlet />
