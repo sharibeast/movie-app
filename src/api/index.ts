@@ -53,11 +53,7 @@ export const getSimilarMovies = async (movie_id: string) => {
     poster_path: `${IMG_URL}${mov.poster_path}`,
   }));
 
-  console.log('similar movies', data);
   const dd = data.filter((movie, idx) => idx < 8);
-
-  console.log('dill', dd);
-
   return dd as PopularMovies[];
 };
 
@@ -71,9 +67,6 @@ export const searchMovies = async (query: string) => {
     backdrop_path: `${IMG_URL}${mov.backdrop_path}`,
     poster_path: `${IMG_URL}${mov.poster_path}`,
   }));
-
-  console.log('results', data);
-
   return data;
 };
 // getPopularMovies();
