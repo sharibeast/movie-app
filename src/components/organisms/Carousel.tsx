@@ -1,53 +1,35 @@
 import React from 'react'
 import Carousel from 'better-react-carousel'
-import ArroLeftIcon from '../atoms/icons/ArroLeft'
-import ArrowRightIcon from '../atoms/icons/ArrowRight'
+// import ArroLeftIcon from '../atoms/icons/ArroLeft'
+// import ArrowRightIcon from '../atoms/icons/ArrowRight'
 
-export default function CarouselSlide() {
-          return (
-                    <Carousel style={{ backgroundColor: "black", position: "relative" }} className='bg-primary-bg'
-                              arrowLeft={<ArrowLeft />}
-                              arrowRight={<ArrowRight />}
-                              containerClassName='lg:w-1/2 h-screen' cols={1} rows={1} gap={10} loop>
-                              <Carousel.Item className='relative'>
-                                        <MovieDetail
-                                                  title='Avatar: The Way of Water'
-                                                  description='2022 | Sci-fi/Action  | 3h 12m'
-                                                  genre='Genres: Sci-fi/Action'
-                                                  src='/src/assets/images/ava.jpg'
-                                        />
-                              </Carousel.Item>
-                              <Carousel.Item className='relative'>
-                                        <MovieDetail
-                                                  src='/src/assets/images/mfGJl8.jpg'
+// export default function CarouselSlide() {
+//           return (
+//                     <Carousel style={{ backgroundColor: "black", position: "relative" }} className='bg-primary-bg'
+//                               arrowLeft={<ArrowLeft />}
+//                               arrowRight={<ArrowRight />}
+//                               containerClassName='lg:w-1/2 h-screen' cols={1} rows={1} gap={10} loop>
+//                               <Carousel.Item className='relative'>
+//                                         <MovieDetail
+//                                                   title='Avatar: The Way of Water'
+//                                                   description='2022 | Sci-fi/Action  | 3h 12m'
+//                                                   genre='Genres: Sci-fi/Action'
+//                                                   src='/src/assets/images/ava.jpg'
+//                                         />
+//                               </Carousel.Item>
+//                               <Carousel.Item className='relative'>
+//                                         <MovieDetail
+//                                                   src='/src/assets/images/mfGJl8.jpg'
 
-                                        />
-                              </Carousel.Item>
+//                                         />
+//                               </Carousel.Item>
 
-                    </Carousel>
-          )
-}
+//                     </Carousel>
+//           )
+// }
 
 
 
-const ArrowLeft = () => {
-          return (
-                    <div
-                              className='absolute right-44 bottom-12 z-10 border rounded-full p-4'>
-                              <ArroLeftIcon />
-                    </div>
-          )
-}
-
-const ArrowRight = () => {
-          return (
-
-                    <div
-                              className='absolute right-20 bottom-12 z-10 border rounded-full p-4'>
-                              <ArrowRightIcon />
-                    </div>
-          )
-}
 
 
 interface MovieDetailProps {

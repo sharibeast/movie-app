@@ -1,18 +1,22 @@
-import React from 'react'
+
+import React from 'react';
+import "react-responsive-carousel/lib/styles/carousel.min.css"; // requires a loader
+import { Carousel } from 'react-responsive-carousel';
+// import 'react-alice-carousel/lib/alice-carousel.css';
 import Button from '../../components/atoms/Button'
 import GoogleIcon from '../../components/atoms/icons/GoogleIcon'
 import TextField from '../../components/atoms/TextField'
 import { Link, useNavigate } from 'react-router-dom'
-import Carousel from '../../components/organisms/Carousel'
-import CarouselSlide from '../../components/organisms/Carousel'
 import { StyledLogo } from '../../components/atoms/Logo'
+import ArrowLeftIcon from '../../components/atoms/icons/ArroLeft'
+import ArrowRightIcon from '../../components/atoms/icons/ArrowRight'
 
 export default function Login() {
   const navigate = useNavigate()
   return (
     <div className='bg-primary-bg text-white py-10 px-4'>
       <StyledLogo />
-      <div className='flex flex-col  lg:flex-row justify-between'>
+      <div className='flex flex-col  md:flex-row justify-between'>
         <div className='lg:w-1/2 grid place-content-center py-16 px-4'>
           <div className='flex flex-col gap-8'>
             <div>
@@ -42,8 +46,62 @@ export default function Login() {
         </div>
 
         {/* carousel */}
-        {/* <CarouselSlide /> */}
+        <C />
+
       </div>
     </div>
   )
 }
+
+
+
+
+const C = () => {
+  return (
+    <Carousel
+      showThumbs={false}
+      showStatus={false}
+      renderArrowPrev={(click) => <ArrowLeft onClick={click} />}
+      renderArrowNext={(click) => <ArrowRight onClick={click} />}
+      infiniteLoop
+      showIndicators={false}
+      className='w-full md:w-1/2 '
+      showArrows={false}
+    >
+      <div>
+        <img className='h-screen  object-cover' src="/src/assets/images/mfGJl8.jpg" />
+      </div>
+      <div>
+        <img className='h-screen  object-cover' src="/src/assets/images/avatarMovieBG.jpg" />
+      </div>
+    </Carousel>
+  )
+}
+
+
+
+
+interface ArrowProp {
+  onClick: () => void
+}
+
+export const ArrowLeft = ({ onClick }: ArrowProp) => {
+  return (
+    <button onClick={onClick}
+      className='absolute right-44 bottom-12 z-10 border rounded-full p-4'>
+      <ArrowLeftIcon />
+    </button>
+  )
+}
+
+export const ArrowRight = ({ onClick }: ArrowProp) => {
+  return (
+
+    <div onClick={onClick}
+      className='absolute right-20 bottom-12 z-10 border rounded-full p-4'>
+      <ArrowRightIcon />
+    </div>
+  )
+}
+
+
