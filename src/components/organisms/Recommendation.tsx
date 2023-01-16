@@ -144,7 +144,7 @@ export const DesktopSideBar = () => {
 
 export const SearchInputBar = () => {
   const [open, setOpen] = useState(false)
-  const [sidebar, setSidebar] = useState(true)
+  const [sidebar, setSidebar] = useState(false)
   const location = useLocation()
   const match = location.pathname
   return (
