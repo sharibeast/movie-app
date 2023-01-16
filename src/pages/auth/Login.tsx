@@ -42,7 +42,7 @@ export default function Login() {
         </div>
 
         {/* carousel */}
-        <CarouselSlide />
+        {/* <CarouselSlide /> */}
       </div>
     </div>
   )
