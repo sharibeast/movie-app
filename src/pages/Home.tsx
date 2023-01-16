@@ -32,7 +32,7 @@ export default function Home() {
 interface CustomLinkProps {
   children: React.ReactNode
   to: string
-  icon: React.ReactNode
+  icon?: React.ReactNode
 }
 function GlowLink({ children, to, icon }: CustomLinkProps) {
   const location = useLocation()
@@ -48,8 +48,6 @@ function GlowLink({ children, to, icon }: CustomLinkProps) {
 export const Movies = () => {
   const { data, isLoading } = useQuery(['popularMovies'], getPopularMovies)
   const { data: upComingMovies } = useQuery(['upcomingMovies'], getUpcomingMovies)
-  const navigate = useNavigate()
-  const [open, setOpen] = useState(false)
 
 
   if (!data || !upComingMovies) {
@@ -115,7 +113,8 @@ export const Navigation = () => {
         <GlowLink icon={<VideoCameraIcon active={match === '/movies'} />} to={"/movies"}>
           movies
         </GlowLink>
-        <GlowLink icon={<TvSeriesIcon />} to={"/tv series"}>Tv series</GlowLink>
+        {/* <GlowLink  icon={<TvSeriesIcon />} to={"/tvseries"}>Tv series</GlowLink> */}
+        <GlowLink to={"/signup"}>Logout</GlowLink>
       </ul>
     </div>
   )

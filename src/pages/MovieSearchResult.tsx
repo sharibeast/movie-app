@@ -5,14 +5,18 @@ import { getPopularMovies, getUpcomingMovies, PopularMovies } from '../api'
 import ExclamationIcon from '../components/atoms/icons/ExclamationIcon'
 import PlayIcon from '../components/atoms/icons/PlayIcon'
 import { MovieCard, SearchInputBar } from '../components/organisms/Recommendation'
+import { useAppSelector } from '../hooks'
+import { useTypedSelector } from '../store/store'
 
 export default function () {
   const navigate = useNavigate()
   const location = useLocation()
-  const { data } = location.state as { data: PopularMovies[] }
-  if (!data) {
-    return <Navigate to={"/"} replace />
-  }
+  // const en  = useAppSelector((state)=>state.)
+  const mv = useTypedSelector((state) => state.movieReducer.movies)
+  // const { data } = location.state as { data: PopularMovies[] }
+  // if (!data) {
+  //   return <Navigate to={"/"} replace />
+  // }
   return (
 
     <div className='flex-1 py-4 text-white bg-primary-bg px-2 md:px-16 md:py-10'>
@@ -22,7 +26,7 @@ export default function () {
           <div>
             <div className='grid grid-cols-2 md:grid-cols-4 gap-6 md:gap-16'>
               {
-                data.map((movie) => <Link to={String(movie.id)} key={movie.id} state={{ data: movie }}><MovieCard src={movie.poster_path} alt={movie.original_title} /></Link>
+                mv.map((movie) => <Link to={String(movie.id)} key={movie.id} state={{ data: movie }}><MovieCard src={movie.poster_path} alt={movie.original_title} /></Link>
                 )
               }
             </div>

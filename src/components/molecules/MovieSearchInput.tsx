@@ -1,22 +1,24 @@
 import React, { useState } from 'react'
+import { createAsyncThunk } from '@reduxjs/toolkit'
 import { useNavigate } from 'react-router-dom'
 import { searchMovies } from '../../api'
+import { useDispatch } from 'react-redux'
 import SearchIcon from '../atoms/icons/SearchIcon'
+import { addMovies, searchMovieByWord } from '../../store/slices/movieSlice'
+import { AppDispatch } from '../../store/store'
 
 export default function MovieSearchInput() {
   const [query, setQuery] = useState('')
   const navigate = useNavigate()
+  const dispatch = useDispatch<AppDispatch>()
 
 
 
   const onSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault()
-    const data = await searchMovies(query)
-
-    if(data){
-      navigate('/results', { state: data })
-    }
-
+    dispatch(searchMovieByWord(query)).then(() => {
+      navigate("/results")
+    })
   }
 
   return (
