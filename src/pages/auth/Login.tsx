@@ -2,7 +2,6 @@
 import React from 'react';
 import "react-responsive-carousel/lib/styles/carousel.min.css"; // requires a loader
 import { Carousel } from 'react-responsive-carousel';
-// import 'react-alice-carousel/lib/alice-carousel.css';
 import Button from '../../components/atoms/Button'
 import GoogleIcon from '../../components/atoms/icons/GoogleIcon'
 import TextField from '../../components/atoms/TextField'
@@ -44,19 +43,14 @@ export default function Login() {
             </form>
           </div>
         </div>
-
         {/* carousel */}
-        <C />
-
+        <CarouselComponent />
       </div>
     </div>
   )
 }
 
-
-
-
-const C = () => {
+const CarouselComponent = () => {
   return (
     <Carousel
       showThumbs={false}
@@ -77,8 +71,6 @@ const C = () => {
     </Carousel>
   )
 }
-
-
 
 
 interface ArrowProp {
